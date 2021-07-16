@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>西安旅游-导航 </title>
+  <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+  <link href="css/style.css" rel='stylesheet' type='text/css' />
+  <link href="css/mycss.css" rel='stylesheet' type='text/css' />
+  <script src="js/jQuery.js"> </script>
+  <script src="js/jquery-1.11.1.min.js"> </script>
+  <!-- 引入高德地图的js和key，怎么拿到key自己百度 -->
+  <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.8&key=	2c9460d6f66aa41ca464a327cb57459a">
+  </script>
+  <style type="text/css">
+    #app {
+      width: 440px;
+      height: 440px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="banner a-banner">
+    <div class="container">
+      <div class="header">
+        <div>
+
+          <div class="header">
+            <div>
+              <img src="images/logo.jpg"
+                style="height: 7%;width: 7%; float: left; margin-top: 5px;margin-left: -150px; ">
+            </div>
+
+            <div class="logo">
+              <a style="margin-left: -50px;" href="index.html">陕西西安</a>
+
+            </div>
+
+            <!-- 天气 -->
+            <div id="weatherpos">
+              <iframe width="250" height="100" frameborder="0" scrolling="no" hspace="0"
+                src="https://i.tianqi.com/?c=code&a=getcode&id=35&site=34&icon=1"></iframe>
+            </div>
+
+            <div class="clearfix"> </div>
+          </div>
+        </div>
+        <div class="clearfix"> </div>
+      </div>
+      <div class="top-nav">
+        <span class="menu">菜单</span>
+        <ul class="nav1">
+          <li><a href="index.html">西安简介</a></li>
+          <li><a href="history.html">文化历史</a></li>
+          <li><a href="accomdation.html" class="active">住宿</a></li>
+          <li><a href="food.html">西安美食</a></li>
+          <li><a href="tell.html">景区公告</a></li>
+          <li><a href="map.html">导游</a></li>
+          <li><a href="contact.html">联系我们</a></li>
+          <li><a href="login.html">登录</a></li>
+        </ul>
+        <script>
+          $("span.menu").click(function () {
+            $("ul.nav1").slideToggle(300, function () {
+            });
+          });
+        </script>
+      </div>
+    </div>
+    <div class="banner-text1" style="height: 0px;">
+      <!-- 用于展示背景图 别动 -->
+    </div>
+  </div>
+  <div class="about-top">
+    <div class="container" style="width: 1270px;">
+      <div class="about-info">
+        <!-- 建立一个容器显示地图 -->
+
+        <div class="about-top-grids">
+          <div class="col-md-4 about-top-grid">
+            <div id="app">
+
+
+            </div>
+
+          </div> 
+
+          <div class="col-md-7 about-top-grid" style="margin-left: 50px;">
+            <div>
+              <a href="https://you.ctrip.com/sight/xian7/1444.html"><img src="images/兵马俑map.png" ></a>
+            </div>
+
+            <div>
+              <a href="https://you.ctrip.com/sight/xian7/1449.html"><img src="images/城墙map.png" ></a>
+            </div>
+            <div>
+              <a href="https://you.ctrip.com/sight/xian7/54080.html"><img src="images/回民街map.png"></a>
+            </div>
+            <div>
+              <a href="https://you.ctrip.com/sight/xian7/26184.html"><img src="images/大唐芙蓉园map.png"></a>
+            </div>
+            <div>
+              <a href="https://you.ctrip.com/sight/xian7/52702.html"><img src="images/钟楼map.png"></a>
+            </div>
+            <div>
+              <a href="https://you.ctrip.com/sight/xian7/6087.html"><img src="images/骊山map.png"></a>
+            </div>
+
+          </div>
+          <div class="clearfix"> </div>
+
+        </div>
+      </div>
+      <div class="about-top-grids">
+
+
+        <div class="clearfix"> </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    window.onload = function () {
+
+      //地图配置
+      AMap.plugin('AMap.Geolocation', function () {
+        var geolocation = new AMap.Geolocation({
+          // 是否使用高精度定位，默认：true
+          enableHighAccuracy: true,
+          // 设置定位超时时间，默认：无穷大
+          timeout: 10000,
+          // 定位按钮的停靠位置的偏移量，默认：Pixel(10, 20)
+          buttonOffset: new AMap.Pixel(10, 20),
+          // 定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+          zoomToAccuracy: true,
+          // 定位按钮的排放位置, RB表示右下
+          buttonPosition: 'RB'
+        })
+
+        //获取当前定位
+        geolocation.getCurrentPosition()
+        //监听定位事件，获取具体位置信息和经纬度
+        AMap.event.addListener(geolocation, 'complete', e => {
+          //定位完成触发
+          // console.log(e) 
+          console.log(e.position.lat)
+          console.log(e.position.lng)
+          var mapSet = []
+          mapSet[1] = e.position.lat
+          mapSet[0] = e.position.lng
+          //  console.log(mapSet)
+
+          //将地图放置容器内
+          var map = new AMap.Map('app', {
+            resizeEnable: true,
+            center: mapSet, // 地图标记title
+            zoom: 17 // 地图视图缩放级别,数值越大越精确
+          })
+          const marker = new AMap.Marker({
+            position: map.getCenter()
+          })
+          marker.setMap(map)
+
+
+          AMap.plugin(['AMap.ToolBar', 'AMap.Scale', 'AMap.MapType'], function () {
+            toolBar = new AMap.ToolBar(); //工具条
+            scale = new AMap.Scale(); //比例尺
+            mapType = new AMap.MapType(); //地图种类
+            map.addControl(toolBar);
+            map.addControl(scale);
+            map.addControl(mapType);
+          })
+
+
+          //如果需要添加标记点，可编辑以下代码
+          //创建一个标记点
+          //var marker1 = new AMap.Marker({
+          // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
+          //position: new AMap.LngLat(116.44927, 39.9584), 
+          //title: "位置标题"
+          //});
+          // 将创建的点标记添加到已有的地图实例：
+          //map.add(marker1);
+        })
+
+
+        AMap.event.addListener(geolocation, 'error', e => {
+          console.log(e) // 定位失败触发
+        })
+      })
+
+      AMap.plugin('AMap.CitySearch', function () {
+        var citySearch = new AMap.CitySearch()
+        citySearch.getLocalCity(function (status, result) {
+          if (status === 'complete' && result.info === 'OK') {
+            console.log(result);
+            // 查询成功，result即为当前所在城市信息
+          }
+        })
+      })
+
+
+    }
+  </script>
+</body>
+
+</html>

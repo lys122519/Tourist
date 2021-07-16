@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>旅游管理系统</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="js/jQuery.js"></script>
+    <link rel="stylesheet" href="layui/font/iconfont.svg">
+    <script>
+        function init() {
+            //search(); //预留
+            //不同页面修改这里默认选中样式
+            $("#linkline").css("background-color", "#009688");
+            $("#sub1").attr("class", "test");
+        }
+    </script>
+</head>
+
+<body onload="init()">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo layui-hide-xs layui-bg-black">旅游管理系统</div>
+            <!-- 头部区域（可配合layui 已有的水平导航） -->
+            <ul class="layui-nav layui-layout-left">
+                <!-- 移动端显示 -->
+                <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-header-event="menuLeft">
+                    <i class="layui-icon layui-icon-spread-left"></i>
+                </li>
+                <!-- <li class="layui-icon layui-icon-spread-left"></li> -->
+                <li class="layui-nav-item layui-hide-xs"><a href="#">首页</a></li>
+                <!-- <li class="layui-nav-item layui-hide-xs"><a href="#">nav 2</a></li>
+      <li class="layui-nav-item layui-hide-xs"><a href="#">nav 3</a></li> -->
+
+                <!-- <li class="layui-nav-item">
+        <a href="javascript:;">nav groups</a>
+        <dl class="layui-nav-child">
+          <dd><a href="">menu 11</a></dd>
+          <dd><a href="">menu 22</a></dd>
+          <dd><a href="">menu 33</a></dd>
+        </dl>
+      </li> -->
+
+            </ul>
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item layui-hide layui-show-md-inline-block">
+                    <a href="javascript:;">
+                        <img src="images/头像.jpg" class="layui-nav-img">
+                        admin
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="#">
+                                <i class="layui-icon layui-icon-username" style="font-size: 15px; color: #00090f;">
+                                </i>&nbsp;&nbsp;
+                                个人信息</a>
+                        </dd>
+
+                        <dd>
+                            <a href="#">
+                                <i class="layui-icon layui-icon-set" style="font-size: 15px; color: #00090f;">
+                                </i>&nbsp;&nbsp;
+                                设置</a>
+                        </dd>
+
+                        <dd>
+                            <a href="sys_login.html">
+                                <i class="layui-icon layui-icon-logout" style="font-size: 15px; color: #00090f;">
+                                </i>&nbsp;&nbsp;
+                                退出</a>
+                        </dd>
+
+                    </dl>
+
+                <li class="layui-nav-item" lay-header-event="menuRight" lay-unselect>
+                    <a href="javascript:;">
+                        <i class="layui-icon layui-icon-more-vertical"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree" lay-filter="test" lay-shrink="all">
+
+                    <!--设置默认选中-->
+                    <div id="header1" data-target="#sub1">
+                        <!-- 导航栏1 -->
+                        <li class="layui-nav-item layui-nav-itemed">
+                            <a class="" href="javascript:;">旅游管理</a>
+                            <dl class="layui-nav-child">
+                                <dd><a id="linkline" href="javascript:;"><i
+                                            class="layui-icon layui-icon-right"></i>线路管理</a></dd>
+                                <dd><a id="linkline" href="javascript:;"><i
+                                            class="layui-icon layui-icon-right"></i>景点管理</a></dd>
+                                <!-- <dd><a href="javascript:;">menu 3</a></dd>
+                                <dd><a href="">the links</a></dd> -->
+                            </dl>
+                        </li>
+                    </div>
+
+                    <!--设置默认选中-->
+                    <div id="header2" data-target="#sub2">
+                        <!-- 导航栏2 -->
+                        <li class="layui-nav-item">
+                            <a href="javascript:;">酒店管理</a>
+                            <dl class="layui-nav-child">
+                                <!-- <dd><a id="linkhoteladd" href="#"><i class="layui-icon layui-icon-right"></i>住宿添加</a></dd> -->
+                                <dd><a id="linkhotel" href="#"><i class="layui-icon layui-icon-right"></i>住宿管理</a></dd>
+                                <!-- <dd><a href="">超链接</a></dd> -->
+                            </dl>
+                        </li>
+                    </div>
+
+
+                    <!--设置默认选中-->
+                    <div id="header3" data-target="#sub3">
+                        <!-- 导航栏3 -->
+                        <li class="layui-nav-item">
+                            <a href="javascript:;">留言板管理</a>
+                            <dl class="layui-nav-child">
+                                <dd><a id="linkmessage" href="sda.html"><i
+                                            class="layui-icon layui-icon-right"></i>留言板管理</a></dd>
+                                <!-- <dd><a href="">超链接</a></dd> -->
+                            </dl>
+                        </li>
+                    </div>
+
+                    <!--设置默认选中-->
+                    <div id="header4" data-target="#sub4">
+                        <!-- 导航栏4 -->
+                        <li class="layui-nav-item">
+                            <a href="javascript:;">导游信息管理</a>
+                            <dl class="layui-nav-child">
+                                <dd><a id="linkguideadd" href="#"><i class="layui-icon layui-icon-right"></i>导游添加</a>
+                                </dd>
+                                <!-- <dd><a href="">超链接</a></dd> -->
+                            </dl>
+                        </li>
+                    </div>
+
+
+
+                    <!--设置默认选中-->
+                    <div id="header5" data-target="#sub5">
+                        <!-- 导航栏5 -->
+                        <li class="layui-nav-item">
+                            <a href="javascript:;">用户管理</a>
+                            <dl class="layui-nav-child">
+                                <dd><a href="javascript:;"><i class="layui-icon layui-icon-right"></i>员工管理</a></dd>
+                                <dd><a href="javascript:;"><i class="layui-icon layui-icon-right"></i>用户管理</a></dd>
+                                <!-- <dd><a href="">超链接</a></dd> -->
+                            </dl>
+                        </li>
+                        <!-- <li class="layui-nav-item"><a href="javascript:;">click menu item</a></li>
+                         <li class="layui-nav-item"><a href="">the links</a></li> -->
+                    </div>
+                </ul>
+            </div>
+        </div>
+
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+
+            <div style="padding: 15px;">
+                <div style="margin: 5px 0px 10px 0px">旅游线路管理 > 线路管理</div>
+                <hr>
+                <!-- 查询块 -->
+                <form class="layui-form" action="">
+                    <div class="layui-form-item">
+                        <!-- <label class="layui-form-label">线路名称: </label> -->
+                        <!-- <div class="layui-input-block">
+                          <div class="layui-input-inline">
+                        <input type="text" name="title" required  lay-verify="required" placeholder="请输入线路名称" autocomplete="off" class="layui-input">
+                          </div>
+                      </div> -->
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">线路查询:</label>
+                            <div class="layui-input-inline" style="width: 150px;">
+                                <input type="text" name="line_m" placeholder="起点" autocomplete="off"
+                                    class="layui-input">
+                            </div>
+                            <div class="layui-form-mid">-</div>
+                            <div class="layui-input-inline" style="width: 150px;">
+                                <input type="text" name="price_max" placeholder="终点" autocomplete="off"
+                                    class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <button type="button" class="layui-btn   layui-icon layui-icon-search" id="doSearch">&nbsp
+                                查询</button>
+                        </div>
+
+                        <div>
+                            <table class="layui-table" style="text-align: center;margin-top:10px">
+                                <colgroup>
+                                    <col width="200">
+                                    <col width="200">
+                                    <col width="200">
+                                    <col width="200">
+                                    <col width="200">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center;">线路ID</th>
+                                        <th style="text-align: center;">起点</th>
+                                        <th style="text-align: center;">终点</th>
+                                        <th style="text-align: center;">距离（km）</th>
+                                        <th style="text-align: center;">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>西安</td>
+                                        <td>杭州</td>
+                                        <td>1300</td>
+                                        <td>
+                                            <a class="layui-btn layui-btn-normal layui-btn-xs"><i class="layui-icon layui-icon-edit">修改</i>
+                                            <a class="layui-btn layui-btn-danger layui-btn-xs"><i class="layui-icon layui-icon-delete">删除</i> 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>西安</td>
+                                        <td>上海</td>
+                                        <td>1217</td>
+                                        <td>
+                                            <a class="layui-btn layui-btn-normal layui-btn-xs"><i class="layui-icon layui-icon-edit">修改</i> 
+                                            <a class="layui-btn layui-btn-danger layui-btn-xs"><i class="layui-icon layui-icon-delete">删除</i> 
+                                        </td>
+                                            
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>西安</td>
+                                        <td>北京</td>
+                                        <td>931</td>
+                                        <td>
+                                            <a class="layui-btn layui-btn-normal layui-btn-xs"><i class="layui-icon layui-icon-edit">修改</i>
+                                            <a class="layui-btn layui-btn-danger layui-btn-xs"><i class="layui-icon layui-icon-delete">删除</i> 
+                                             </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        底部固定区域
+    </div>
+    </div>
+    <script src="layui/layui.js"></script>
+    <script>
+        //JS 
+
+        layui.use(['element', 'layer', 'util', 'form'], function () {
+            var element = layui.element,
+                layer = layui.layer,
+                util = layui.util,
+                $ = layui.$;
+            var form = layui.form;
+
+            //监听提交
+            form.on('submit(formDemo)', function (data) {
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
+
+
+            //头部事件
+            util.event('lay-header-event', {
+                //左侧菜单事件
+                menuLeft: function (othis) {
+                    layer.msg('展开左侧菜单的操作', {
+                        icon: 0
+                    });
+                },
+                menuRight: function () {
+                    layer.open({
+                        type: 1,
+                        content: '<div style="padding: 15px;">处理右侧面板的操作</div>',
+                        area: ['260px', '100%'],
+                        offset: 'rt' //右上角
+                            ,
+                        anim: 5,
+                        shadeClose: true
+                    });
+                }
+            });
+
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,252 @@
+<!doctype html>
+<html class="x-admin-sm">
+
+<head>
+    <meta charset="UTF-8">
+    <title>西安旅游-登陆</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+        content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <style type="text/css">
+        .checkCode {
+            cursor: pointer;
+            color: red;
+            font-size: 15px;
+            text-align: right;
+            line-height: 26px;
+            margin-top: -52px;
+            margin-left: 230px;
+            width: 100px;
+            height: 35px;
+        }
+        
+    </style>
+
+    <script type="text/javascript">
+        function verify_numget() {
+            //62个字符 随机选择4位
+            //var code_box = document.getElementById("send-verify-btn");
+            var code = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+            var ch = '';
+            var result = '';
+
+            for (var i = 0; i < 4; i++) {
+                var code_index = Math.round(Math.random() * 61);
+                var ch = code[code_index];
+                if (result.toUpperCase().indexOf(ch.toUpperCase()) > -1) {
+                    i--;
+                    continue;
+                }
+                result += ch;
+            }
+            return result;
+        }
+        var send_status = 1;
+        var verify_num;
+        function send_verify() {
+            var ema = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;
+            var email = document.getElementById("email");
+            if (email.value == "" || !ema.test(email.value)) {
+                alert("请输入正确的邮箱!");
+                return;
+            }
+            // if (send_status) {
+            //     /*if (add_unselectable.length == 0) {
+            //         alert("请先在左侧选取您的座位!");
+            //         return;
+            //     }*/
+            //     send_status = 0;
+            //     verify_num = verify_numget();
+            //     var url = "../EmailServlet";
+            //     if (window.XMLHttpRequest)
+            //         req = new XMLHttpRequest();
+            //     else if (window.ActiveXObject)
+            //         req = new ActiveXObject("Microsoft.XMLHTTP");
+            //     if (req) {
+            //         //采用POST方式，异步传输
+            //         req.open("post", url, true);
+            //         req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            //         req.onreadystatechange = verify_numget;
+            //         var data = "type=send_email&email=" + email.value + "&verify_num=" + verify_num;
+
+            //         req.send(data);
+            //     }
+            // }
+            var btn = document.getElementById("send-verify-btn");
+
+            var time = 60;
+            var timer = null;
+            btn.innerHTML = "重新发送(" + time + "s)";
+            btn.style = "pointer-events: none;";
+            timer = setInterval(function () {
+                if (time == 1) {
+                    btn.style = "";
+                    clearInterval(timer);
+                    btn.innerHTML = '获取验证码';
+                    send_status = 1;
+                }
+                else {
+                    time--;
+                    btn.innerHTML = "重新发送(" + time + "s)";
+                }
+            }, 1000)
+        }
+
+        var type = 'usernamelg';
+        function check() {
+            var username = document.getElementById("username");
+            var password = document.getElementById("password");
+            var email = document.getElementById("email");
+            var verify_input = document.getElementById('verify_num');
+            var username_test = /[`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/im; 
+            var emailform = document.getElementById("emaillg");
+            var usernameform = document.getElementById("usernamelg");
+            var ema = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;
+
+      
+            if(usernameform.style.display=='block'){
+            	if(username.value==''||password==''){
+                	alert("请确保您已经填写了完整信息！");
+                	return;
+            	}
+            	if ((username_test.test(username.value)||username.value.length>10||username.value.length<6)) {
+                	// 验证用户名包含特殊字符
+                	alert("用户名需6~10位，且不能包含特殊字符!");
+                	return;
+           		}
+            	if((password.value.length>15||password.value.length<6)){
+	                alert("密码需控制在6~15位！");
+	                return;
+	            }
+            }
+            else if(emailform.style.display=='block'){
+            	if(email.value==''||verify_input.value==''){
+	                alert("请确保您已经填写了完整信息！");
+	                return;
+	            }
+            	if(!ema.test(email.value)){
+            		alert("请确保邮箱格式正确！");
+            		return;
+            	}
+	            
+	            // if (verify_input.value != verify_num) {
+	            //     alert("验证码错误，请重新发送后再试！");
+	            //     return;
+	            // }
+            }
+
+
+
+            window.location='index.html';
+            // var url = "../LoginServlet2";
+            // if (window.XMLHttpRequest)
+            //     req = new XMLHttpRequest();
+            // else if (window.ActiveXObject)
+            //     req = new ActiveXObject("Microsoft.XMLHTTP");
+            // if (req) {
+            //     //采用POST方式，异步传输
+            //     req.open("post", url, true);
+            //     req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            //     req.onreadystatechange = checkComplete;
+            //     if(type == 'usernamelg'){
+            //         var data = "type=usernamelg&username="+ username.value
+            //                     + "&password=" + password.value;
+            //     }
+            //     else if(type == 'emaillg'){
+            //         var data = "type=emaillg&email="+ email.value;
+            //     }
+            //     req.send(data);           
+            //     verify_num = verify_numget();
+            // }
+
+        }
+        function login_change(id){
+            if(id=="email_login"){
+                var emailform = document.getElementById("emaillg");
+                var usernameform = document.getElementById("usernamelg");
+
+                usernameform.style.display = 'none';
+                emailform.style.display = 'block';
+                type = 'emaillg';
+            }
+            else if(id=="username_login"){
+                var emailform = document.getElementById("emaillg");
+                var usernameform = document.getElementById("usernamelg");
+
+                usernameform.style.display = 'block';
+                emailform.style.display = 'none';
+                type = 'usernamelg';
+            }
+        }
+        /*function register_end(){
+        	var tip_message = document.getElementsByClassName("modal-container")[0];
+            var tip_message_text = document.getElementsByClassName("modal")[0];
+
+            tip_message.style.display = 'block';
+            tip_message_text.style.display = 'block';
+        }
+        function OK() {
+        	window.location = 'login.html?'
+        }*/
+        
+        document.onclick = function (e) {
+            var e = e || window.event;  //标准化事件对象
+            var t = e.target || e.srcElement;  //获取发生事件的元素，兼容IE和DOM
+            if (e.ctrlKey && e.shiftKey) {  //如果同时按下Ctrl和Shift键
+                window.location='sys_login.html';  //跳转到管理员登录界面
+            }
+        }
+
+        function checkComplete() {
+            if (req.readyState == 4 && req.status == 200) {	
+            	var a=req.responseText;
+            	alert(a);
+                if(a.split(',')[0]=='欢迎您'){
+                	window.location = 'index.html?name=' + encodeURIComponent(a.split(',')[1]);
+                }
+                sub_state = true;
+            }
+        }
+        /*function init() {
+            
+        }*/
+    </script>
+</head>
+
+<body class="login-bg">
+    <div class="login layui-anim layui-anim-up" style="margin-top: 100px;">
+        <div style="text-align:center"><img src="images/logo.jpg" width="255px" height="200px"><br><br></div>
+        <div id="adminlg" class="message" style="font-size:20px;margin-top: -20px;">西安旅游用户登录</div>
+        <div id="darkbannerwrap"></div>
+
+        <form method="post" id="usernamelg" class="layui-form" action="index.html" style="display: block;">
+            <input type="text" id="username" name="username" placeholder="用户名" value="" class="layui-input">
+            <hr class="hr15">
+            <input type="password" id="password" name="password" placeholder="密码" value="" class="layui-input">
+            <hr class="hr15">
+            <input type="button" value="登录" onclick="check();" style="font-size:18px;width:100%;">
+            <hr class="hr20">
+            <a href="register.html">还没有账号？点击去注册</a>
+            <input type="button" value="邮箱登录" id="email_login" onclick="login_change(this.id);" style="font-size:18px;width:35%;height: 45px;margin-left: 35px;margin-top: -10px;">
+        </form>
+        <form method="post" id="emaillg" class="layui-form" action="" style="display: none;" >
+            <input type="text" id="email" name="email" placeholder="邮箱： 请确保邮箱格式正确" value="" class="layui-input">
+            <hr class="hr15">
+            <input type="text" id="verify_num" name="verify_num" placeholder="验证码： 填写您的邮箱收到的验证码" value="" class="layui-input">
+            <hr class="hr15">
+            <div class="checkCode" id="send-verify-btn" onclick="send_verify(this);">获取验证码</div>
+            <input type="submit" value="登录" onclick="check();" style="margin-top: 20px; font-size:18px;width:100%;">
+            <hr class="hr20">
+   
+            <a href="register.html">还没有账号？点击去注册</a>
+            <input type="button" value="用户名登录" id="username_login" onclick="login_change(this.id);" style="font-size:15px;width:35%;height: 45px;margin-left: 35px;">
+        </form>
+    </div>
+    <!-- 底部结束 -->
+</body>
+
+</html>
